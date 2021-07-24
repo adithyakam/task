@@ -6,7 +6,8 @@ import { loginUserUtil } from './login.util'
 
 const initialState={
     user:null,
-    isLoggedIn:false
+    isLoggedIn:false,
+    loginFailed:false
 }
 
 

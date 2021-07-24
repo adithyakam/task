@@ -1,0 +1,27 @@
+.card{
+    width:200px;
+    height: 250px;
+    border: 1px solid beige;
+    background-color: rgb(252, 252, 252);
+    margin: 10px;
+    text-align: left;
+    padding: 20px 0 0 20px;
+    text-align: left;
+    border-radius: 8px;
+    box-shadow: 0.5px 3px 5px rgb(211, 209, 209);
+}
+
+.card p{
+    font-size: 0.9rem;
+}
+
+.card span{
+    font-size: 1rem;
+    width: 30px;
+    text-align: left;
+    font-weight: 500;
+    width: 50px;
+    color: rgb(65, 64, 64);
+}
+
+

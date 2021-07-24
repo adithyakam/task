@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import "./Login.css"
 
 import {loginUser} from "../../Redux/Login/login.actions"
+import { useHistory } from 'react-router'
 
 function Login(props) {
 
-    const {loginUser}=props
+  const history=useHistory()
+
+    const {loginUser,isLoggedIn,loginFailed}=props
 
     const [user, setUser] = useState({
         username:"",
@@ -27,21 +30,40 @@ function Login(props) {
         loginUser(user)
     }
 
+useEffect(() => {
+if(isLoggedIn){
+  history.push('/list')
+}
+
+
+})
+console.log(loginFailed);
     return (
         <div className="login">
-          <form onSubmit={onSubmitForm}>
+          <div className="loginContainer"> 
+          <h3 className={`${(loginFailed)?'show':'hid'}`}>*login failed please check username and password</h3>
+          <form onSubmit={onSubmitForm} className="login_Form" >
               <label>Username</label>
-              <input type="text" name="username" onChange={inputChange} placeholder="enter username" />
+              <input type="text" name="username" onChange={inputChange} placeholder="enter username" required/>
               <label>Password</label>
-              <input type="password" name="password" onChange={inputChange} placeholder="enter password" />
-            <button>submit</button>
+              <input type="password" name="password" onChange={inputChange} placeholder="enter password" required />
+            <button type="submit">submit</button>
           </form>
+          </div>
+         
         </div>
     )
+}
+
+
+const mapStateToProp=(state)=>{
+  return{isLoggedIn:state.login.isLoggedIn,
+    loginFailed:state.login.loginFailed
+  }
 }
 
 const mapDispathToProp=(dispatch)=>{
   return { loginUser:(user)=>dispatch(loginUser(user))}
 }
 
-export default connect(null,mapDispathToProp)(Login)
+export default connect(mapStateToProp,mapDispathToProp)(Login)
